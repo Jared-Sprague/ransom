@@ -1,0 +1,14 @@
+{
+  "name": "ransom",
+  "version": "1.0.0",
+  "description": "LD44 webgame",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jared Sprague",
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "^3.16.2"
+  }
+}
