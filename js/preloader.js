@@ -16,7 +16,9 @@ const Preloader = new Phaser.Class({
                     files: [
                         {type: 'image', key: 'loadingbar_bg', url: 'img/loadingbar_bg.png'},
                         {type: 'image', key: 'loadingbar_fill', url: 'img/loadingbar_fill.png'},
-                        {type: 'image', key: 'gameroom', url: 'img/gameroom.png'}
+                        {type: 'image', key: 'gameroom', url: 'img/gameroom.png'},
+                        {type: 'image', key: 'puzzleroom', url: 'img/puzzleroom.png'},
+                        {type: 'image', key: 'bow', url: 'img/bow.png'}
                     ]
                 }
             });
@@ -62,6 +64,12 @@ const Preloader = new Phaser.Class({
         // now load images, audio etc.
         // sprites
         this.load.atlas('sprites', 'img/spritearray.png', 'img/spritearray.json');
+        this.load.atlas('puzzle_bar', 'img/bar_sheet.png', 'img/bar_array.json');
+
+        this.load.spritesheet('ring',
+            'img/ring_spritesheet.png',
+            { frameWidth: 32, frameHeight: 32 }
+        );
 
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');

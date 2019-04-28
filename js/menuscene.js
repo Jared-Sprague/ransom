@@ -30,12 +30,11 @@ let MainMenuScene = new Phaser.Class({
 
     doTutor: function () {
         console.log('doTutor was called!');
-        this.scene.start('tutorscene');
+        this.scene.start('tutorialscene');
     },
 
     doStart: function () {
-        console.log('menuscene doStart was called!');
-        this.scene.start('gamescene');
+        this.scene.start('bowpuzzlescene');
     }
 
 });

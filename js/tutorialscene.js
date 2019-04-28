@@ -7,8 +7,8 @@ let TutorialScene = new Phaser.Class({
 
     initialize:
 
-        function TutorScene() {
-            Phaser.Scene.call(this, {key: 'tutorscene'});
+        function TutorialScene() {
+            Phaser.Scene.call(this, {key: 'tutorialscene'});
         },
 
     preload: function () {

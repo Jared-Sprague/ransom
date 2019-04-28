@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="node_modules/phaser/dist/phaser.min.js"></script> 
+    <script src="node_modules/phaser/dist/phaser.js"></script>
     <script src="js/phaser_addon.js"></script> 
     <script src="js/preloader.js"></script> 
     <script src="js/menuscene.js"></script> 
-    <script src="js/gamescene.js"></script> 
+    <script src="js/bowpuzzlescene.js"></script>
     <script src="js/tutorialscene.js"></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
 					gravity: 0
 				}
 			},
-		scene: [ Preloader, MainMenuScene, TutorialScene, GameScene ]
+		scene: [ Preloader, MainMenuScene, TutorialScene, BowPuzzleScene ]
 	};
 
 	let game = new Phaser.Game(config);
