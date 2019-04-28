@@ -6,7 +6,7 @@
     <script src="js/preloader.js"></script> 
     <script src="js/menuscene.js"></script> 
     <script src="js/gamescene.js"></script> 
-    <script src="js/tutorial.js"></script> 
+    <script src="js/tutorialscene.js"></script>
 </head>
 <body>
 
@@ -14,8 +14,8 @@
 
 	var config = {
 		type: Phaser.AUTO,
-		width: 800,
-		height: 600,
+		width: 1280,
+		height: 720,
 		backgroundColor: '#006060',
 		parent: 'phaser-example',
 		physics: {
@@ -24,10 +24,10 @@
 					gravity: 0
 				}
 			},
-		scene: [ Preloader, MainMenu, TutorScene, GameScene ]
+		scene: [ Preloader, MainMenuScene, TutorialScene, GameScene ]
 	};
 
-	var game = new Phaser.Game(config);
+	let game = new Phaser.Game(config);
     </script>
 
 </body>

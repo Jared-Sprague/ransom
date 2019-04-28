@@ -1,7 +1,7 @@
 // Phaser3 example game
 // tutorial scene
 
-let TutorScene = new Phaser.Class({
+let TutorialScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 

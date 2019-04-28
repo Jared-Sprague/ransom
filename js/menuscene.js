@@ -1,7 +1,7 @@
 // Phaser3 example game
 // mein menu scene
 
-let MainMenu = new Phaser.Class({
+let MainMenuScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -17,8 +17,9 @@ let MainMenu = new Phaser.Class({
     create: function () {
 
         // add logo
-        //this.sys.config.backgroundColor = '#f3cca3';
-        let logo = this.add.sprite(400, 200, 'sprites', 'phaser3');
+        let logo = this.add.sprite(400, 200, 'sprites', 'title_logo');
+
+        let background = this.add.image(0, 0, 'gameroom').setOrigin(0, 0);
 
         // add tutorial and start button
         this.btnhelp = this.addButton(400 - 80, 400, 'sprites', this.doTutor, this, 'btn_quest_hl', 'btn_quest', 'btn_quest_hl', 'btn_quest');

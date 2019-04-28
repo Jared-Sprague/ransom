@@ -9,13 +9,14 @@ const Preloader = new Phaser.Class({
 
         function Preloader() {
             // note: the pack:{files[]} acts like a pre-preloader
-            // this eliminates the need for an extra "boot" scene just to preload the loadingbar images
+            // this eliminates the need for an extra "boot" scene just to preload the loading bar images
             Phaser.Scene.call(this, {
                 key: 'preloader',
                 pack: {
                     files: [
                         {type: 'image', key: 'loadingbar_bg', url: 'img/loadingbar_bg.png'},
-                        {type: 'image', key: 'loadingbar_fill', url: 'img/loadingbar_fill.png'}
+                        {type: 'image', key: 'loadingbar_fill', url: 'img/loadingbar_fill.png'},
+                        {type: 'image', key: 'gameroom', url: 'img/gameroom.png'}
                     ]
                 }
             });
@@ -48,8 +49,7 @@ const Preloader = new Phaser.Class({
     },
 
     onFileProgress: function (file) {
-        debugger;
-        assetText.setText('onFileProgress: file.key=' + file.key);
+        console.log('Loading file: ', file.key);
     },
 
     preload: function () {
@@ -71,12 +71,6 @@ const Preloader = new Phaser.Class({
         this.load.audio('coin', ['snd/coin.mp3', 'snd/coin.ogg']);
         this.load.audio('bomb', ['snd/expl.mp3', 'snd/expl.ogg']);
         this.load.audio('btn', ['snd/btn.mp3', 'snd/btn.ogg']);
-
-        // !! TESTING !! load the same image 500 times just to slow down the load and test the loading bar
-        for (var i = 0; i < 500; i++) {
-            this.load.image('testloading' + i, 'img/spritearray.png');
-        }
-        // !! TESTING !!
     },
 
     create: function () {
