@@ -33,10 +33,13 @@ let BowPuzzleScene = new Phaser.Class({
         let totalBars = 3;
         let barsPositionX = 195;
         let barsPositionY = 70;
+        let startingAngle = 0;
 
         // create the bars over the bow box
         for (let i = 0; i < totalBars; i++) {
             let bar = this.add.sprite(barsPositionX, barsPositionY += 100, 'puzzle_bar');
+            bar.angle = startingAngle;
+            startingAngle -= 2;
             this.bars.push(bar);
 
             // Animations
