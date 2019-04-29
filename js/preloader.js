@@ -63,13 +63,8 @@ const Preloader = new Phaser.Class({
 
         // sprites sheets
         this.load.atlas('sprites', 'img/spritearray.png', 'img/spritearray.json');
-        this.load.atlas('puzzle_bar', 'img/bar_sheet.png', 'img/bar_array.json');
+        this.load.atlas('puzzle_bar', 'img/bar_sheet2.png', 'img/bar_array.json');
         this.load.atlas('bar_open', 'img/bar_open_sheet.png', 'img/bar_open_array.json');
-
-        // this.load.spritesheet('ring',
-        //     'img/ring_spritesheet.png',
-        //     { frameWidth: 32, frameHeight: 32 }
-        // );
 
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');
