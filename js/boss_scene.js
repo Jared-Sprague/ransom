@@ -10,12 +10,15 @@ let BossScene = new Phaser.Class({
         // Background image
         this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
 
-        // Add sprites
+        // State
         this.fireballs = [];
+        this.bowCooldown = false;
 
         // Add audio
         this.bossIntoMusic = this.sound.add('ost_boss_intro');
         this.bossBattleMainMusic = this.sound.add('ost_boss_battle_main', {loop: true});
+        this.bowShootSfx = this.sound.add('sfx_bow_shoot');
+        this.hitSfx = this.sound.add('sfx_hit');
 
         this.bossIntoMusic.once("complete", () => {
             this.bossBattleMainMusic.play();
@@ -107,6 +110,7 @@ let BossScene = new Phaser.Class({
 
     doOverlapFireball: function (boy, fireball) {
         boy.setTint(0xff0000);
+        this.hitSfx.play();
         setTimeout(() => {
             boy.clearTint();
         }, 200);
@@ -188,18 +192,25 @@ let BossScene = new Phaser.Class({
     },
 
     playerShoot: function () {
-        let arrow = this.physics.add.sprite(320, 475, 'arrow');
-        arrow.setCollideWorldBounds(true);
-        this.physics.add.overlap(this.boss, arrow, this.doOverlapArrow, null, this);
-        this.tweens.add({
-            targets: arrow,
-            x: 1400,
-            duration: 1000,
-            ease: 'linear',
-            onComplete: () => {
-                // clean up sprite when it goes off screen
-                arrow.destroy();
-            }
-        });
+        if (!this.bowCooldown) {
+            let arrow = this.physics.add.sprite(320, 475, 'arrow');
+            arrow.setCollideWorldBounds(true);
+            this.physics.add.overlap(this.boss, arrow, this.doOverlapArrow, null, this);
+            this.tweens.add({
+                targets: arrow,
+                x: 1400,
+                duration: 1000,
+                ease: 'linear',
+                onComplete: () => {
+                    // clean up sprite when it goes off screen
+                    arrow.destroy();
+                }
+            });
+            this.bowShootSfx.play();
+            this.bowCooldown = true;
+            setTimeout(() => {
+                this.bowCooldown = false;
+            }, 300);
+        }
     }
  });

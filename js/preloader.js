@@ -87,6 +87,8 @@ const Preloader = new Phaser.Class({
         // SFX
         this.load.audio('sfx_clunk', 'snd/sfx_clunk.mp3');
         this.load.audio('sfx_stone', 'snd/sfx_stone_slide.mp3');
+        this.load.audio('sfx_bow_shoot', 'snd/sfx_bow_shoot.mp3');
+        this.load.audio('sfx_hit', 'snd/hit.wav');
     },
 
     create: function () {
