@@ -22,7 +22,8 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'bow', url: 'img/bow.png'},
                         {type: 'image', key: 'title', url: 'img/titleransom.png'},
                         {type: 'image', key: 'start', url: 'img/startbutton.png'},
-                        {type: 'image', key: 'fireball', url: 'img/fireball.png'}
+                        {type: 'image', key: 'fireball', url: 'img/fireball.png'},
+                        {type: 'image', key: 'arrow', url: 'img/arrow.png'},
                     ]
                 }
             });

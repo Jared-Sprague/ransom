@@ -24,24 +24,25 @@ let BossScene = new Phaser.Class({
         this.bossIntoMusic.play();
 
         // Add boss
-        let boss = this.add.sprite(1050, 500, 'boss');
-        boss.setInteractive();
+        this.boss = this.physics.add.sprite(1050, 500, 'boss');
+        this.boss.setInteractive();
+        this.boss.setCollideWorldBounds(true);
+        this.boss.body.setSize(135, 300);
 
-        boss.on('pointerdown', () => {
-            // test different pose
-            let handPosition = Phaser.Math.Between(1, 3);
-            boss.setFrame('boss' + handPosition);
+        this.boss.on('pointerdown', () => {
+           // shoot arrow at boss
+           if (this.boy.getData("standing") === "true") {
+               this.boy.setFrame('bowdrawn');
+               this.boy.body.setOffset(60, 50);
+           }
+        });
 
-            if (handPosition === 1) {
-                // no shoot
-            }
-            else if (handPosition === 2) {
-                // high shoot
-                this.createFireball(815, 400, 'high');
-            }
-            else if (handPosition === 3) {
-                // low shoot
-                this.createFireball(820, 560, 'low');
+        this.boss.on('pointerup', () => {
+            // shoot arrow at boss
+            if (this.boy.getData("standing") === "true") {
+                this.boy.setFrame('bowholding');
+                this.playerShoot();
+                this.boy.body.setOffset(60, 50);
             }
         });
 
@@ -53,18 +54,23 @@ let BossScene = new Phaser.Class({
 
         // player input
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Start boss firing
+        setInterval(() => {
+            this.bossFire();
+        }, 1000);
     },
 
     update: function (time, delta) {
-        if (this.cursors.up.isDown && this.boy.getData("jumping") === "false") {
+        if (this.cursors.space.isDown && this.boy.getData("jumping") === "false") {
             this.playerJump();
         }
 
-        if (this.cursors.down.isDown && this.boy.getData("ducking") === "false") {
+        if (this.cursors.shift.isDown && this.boy.getData("ducking") === "false") {
             this.playerDuck();
         }
 
-        if (this.cursors.down.isUp && this.boy.getData("ducking") === "true") {
+        if (this.cursors.shift.isUp && this.boy.getData("ducking") === "true") {
             this.playerStand();
         }
     },
@@ -100,14 +106,21 @@ let BossScene = new Phaser.Class({
     },
 
     doOverlapFireball: function (boy, fireball) {
-        let fireballType = fireball.getData("type");
-
         boy.setTint(0xff0000);
         setTimeout(() => {
             boy.clearTint();
         }, 200);
 
         fireball.destroy();
+    },
+
+    doOverlapArrow: function (boss, arrow) {
+        boss.setTint(0xff0000);
+        setTimeout(() => {
+            boss.clearTint();
+        }, 200);
+
+        arrow.destroy();
     },
 
     playerJump: function () {
@@ -126,7 +139,7 @@ let BossScene = new Phaser.Class({
                     this.boy.setFrame('jump');
 
                     // change the physics collision area
-                    this.boy.body.setSize(200, 420, false);
+                    this.boy.body.setSize(180, 420, false);
                     this.boy.body.setOffset(40, 50);
                 },
                 onComplete: () => {
@@ -142,7 +155,7 @@ let BossScene = new Phaser.Class({
             this.boy.setFrame('duck');
 
             // change the physics collision area
-            this.boy.body.setSize(200, 320, false);
+            this.boy.body.setSize(180, 320, false);
             this.boy.body.setOffset(60, 300);
         }
     },
@@ -152,7 +165,41 @@ let BossScene = new Phaser.Class({
         this.boy.setData("jumping", "false");
         this.boy.setData("ducking", "false");
         this.boy.setFrame('000_standing');
-        this.boy.body.setSize(180, 550, false);
+        this.boy.body.setSize(160, 550, false);
         this.boy.body.setOffset(30, 50);
+    },
+
+    bossFire: function () {
+        // test different pose
+        let handPosition = Phaser.Math.Between(1, 3);
+        this.boss.setFrame('boss' + handPosition);
+
+        if (handPosition === 1) {
+            // no shoot
+        }
+        else if (handPosition === 2) {
+            // high shoot
+            this.createFireball(815, 400, 'high');
+        }
+        else if (handPosition === 3) {
+            // low shoot
+            this.createFireball(820, 560, 'low');
+        }
+    },
+
+    playerShoot: function () {
+        let arrow = this.physics.add.sprite(320, 475, 'arrow');
+        arrow.setCollideWorldBounds(true);
+        this.physics.add.overlap(this.boss, arrow, this.doOverlapArrow, null, this);
+        this.tweens.add({
+            targets: arrow,
+            x: 1400,
+            duration: 1000,
+            ease: 'linear',
+            onComplete: () => {
+                // clean up sprite when it goes off screen
+                arrow.destroy();
+            }
+        });
     }
  });
