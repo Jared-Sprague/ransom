@@ -61,10 +61,10 @@ const Preloader = new Phaser.Class({
         this.loadingbar_fill = this.add.sprite(400, 300, "loadingbar_fill");
         this.setPreloadSprite(this.loadingbar_fill);
 
-        // now load images, audio etc.
-        // sprites
+        // sprites sheets
         this.load.atlas('sprites', 'img/spritearray.png', 'img/spritearray.json');
         this.load.atlas('puzzle_bar', 'img/bar_sheet.png', 'img/bar_array.json');
+        this.load.atlas('bar_open', 'img/bar_open_sheet.png', 'img/bar_open_array.json');
 
         // this.load.spritesheet('ring',
         //     'img/ring_spritesheet.png',

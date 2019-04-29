@@ -29,7 +29,7 @@ let BowPuzzleScene = new Phaser.Class({
     },
 
     createBars: function () {
-        this.bars = [];
+        this.lockedBars = [];
         let totalBars = 3;
         let barsPositionX = 195;
         let barsPositionY = 70;
@@ -49,7 +49,7 @@ let BowPuzzleScene = new Phaser.Class({
             let bar = this.add.sprite(barsPositionX, barsPositionY += 100, 'puzzle_bar');
             bar.angle = startingAngle;
             startingAngle -= 2;
-            this.bars.push(bar);
+            this.lockedBars.push(bar);
 
             bar.anims.play('bar_slider', true, Phaser.Math.Between(0, frames.length - 1));
             bar.setInteractive();
@@ -70,15 +70,52 @@ let BowPuzzleScene = new Phaser.Class({
     checkUnlockSuccess: function () {
         console.log('check unlock');
 
-        for (let i = 0; i < this.bars.length; i++) {
+        for (let i = 0; i < this.lockedBars.length; i++) {
+            let textureFrame = this.lockedBars[i].anims.currentFrame.textureFrame;
+            console.log('bar state: ', i, this.lockedBars[i].anims.isPaused, textureFrame);
+
             // noinspection JSValidateTypes
-            if (!this.bars[i].anims.isPaused || this.bars[i].anims.currentFrame.index !== 15) {
+            if (!this.lockedBars[i].anims.isPaused || (textureFrame !== "017" && textureFrame !== "006")) {
+                console.log('breaking on index i:', i);
                 break;
             }
-            else if (i + 1 === this.bars.length) {
+            else if (i + 1 === this.lockedBars.length) {
                 // all bars paused at correct index
-                console.log("UNLOCKED!")
+                console.log("UNLOCKED!");
+                this.unlockBars();
             }
         }
+    },
+
+    unlockBars: function () {
+        this.unlockedBars = [];
+        let totalBars = 3;
+        let barsPositionX = 195;
+        let barsPositionY = 70;
+        let startingAngle = 0;
+
+        // First remove all the locked bars
+        for (let i = 0; i < this.lockedBars.length; i++) {
+            this.lockedBars[i].destroy();
+        }
+
+        // Create bar opening animation
+        let frames = this.anims.generateFrameNames('bar_open');
+        this.anims.create({
+            key: 'open_bar',
+            frames: frames,
+            frameRate: 4,
+            repeat: 0
+        });
+
+        // create the bars over the bow box
+        for (let i = 0; i < totalBars; i++) {
+            let bar = this.add.sprite(barsPositionX, barsPositionY += 100, 'bar_open');
+            bar.angle = startingAngle;
+            startingAngle -= 2;
+            this.unlockedBars.push(bar);
+
+            bar.anims.play('open_bar');
+        }
     }
-});
+ });
