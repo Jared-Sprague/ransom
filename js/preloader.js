@@ -22,7 +22,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'bow', url: 'img/bow.png'},
                         {type: 'image', key: 'title', url: 'img/titleransom.png'},
                         {type: 'image', key: 'start', url: 'img/startbutton.png'},
-                        {type: 'image', key: 'fireball', url: 'img/fireball.png'},
+                        {type: 'image', key: 'fireball', url: 'img/fireball.png'}
                     ]
                 }
             });
@@ -70,6 +70,7 @@ const Preloader = new Phaser.Class({
         this.load.atlas('puzzle_bar', 'img/bar_sheet2.png', 'img/bar_array.json');
         this.load.atlas('bar_open', 'img/bar_open_sheet.png', 'img/bar_open_array.json');
         this.load.atlas('boss', 'img/boss_sheet.png', 'img/boss_array.json');
+        this.load.atlas('boy_fight', 'img/boy_fight_sheet.png', 'img/boy_fight_array.json');
 
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');

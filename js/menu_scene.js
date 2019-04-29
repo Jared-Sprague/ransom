@@ -49,6 +49,7 @@ let MainMenuScene = new Phaser.Class({
     doStart: function () {
         this.music.stop();
         this.scene.start('boss_scene');
+        // this.scene.start('bowpuzzlescene');
     }
 
 });

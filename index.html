@@ -2,8 +2,8 @@
 <html>
 <head>
     <script src="node_modules/phaser/dist/phaser.js"></script>
-    <script src="js/phaser_addon.js"></script> 
-    <script src="js/preloader.js"></script> 
+    <script src="js/phaser_addon.js"></script>
+    <script src="js/preloader.js"></script>
     <script src="js/menu_scene.js"></script>
     <script src="js/bowpuzzle_scene.js"></script>
     <script src="js/boss_scene.js"></script>
@@ -11,27 +11,28 @@
 </head>
 <body>
 
-    <iframe src="snd/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+<iframe src="snd/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
 
-    <script>
+<script>
 
-	const config = {
-		type: Phaser.AUTO,
-		width: 1280,
-		height: 720,
-		backgroundColor: '#7e86c3',
-		parent: 'phaser-example',
-		physics: {
-				default: 'arcade',
-				arcade: {
-					gravity: 0
-				}
-			},
-		scene: [ Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene ]
-	};
+    const config = {
+        type: Phaser.AUTO,
+        width: 1280,
+        height: 720,
+        backgroundColor: '#7e86c3',
+        parent: 'ransom',
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: 0,
+                debug: false,
+            }
+        },
+        scene: [Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene]
+    };
 
-	let game = new Phaser.Game(config);
-    </script>
+    let game = new Phaser.Game(config);
+</script>
 
 </body>
 </html>
