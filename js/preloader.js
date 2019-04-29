@@ -16,9 +16,11 @@ const Preloader = new Phaser.Class({
                     files: [
                         {type: 'image', key: 'loadingbar_bg', url: 'img/loadingbar_bg.png'},
                         {type: 'image', key: 'loadingbar_fill', url: 'img/loadingbar_fill.png'},
-                        {type: 'image', key: 'gameroom', url: 'img/gameroom.png'},
+                        {type: 'image', key: 'gameroom', url: 'img/startroom.png'},
                         {type: 'image', key: 'puzzleroom', url: 'img/puzzleroom.png'},
-                        {type: 'image', key: 'bow', url: 'img/bow.png'}
+                        {type: 'image', key: 'bow', url: 'img/bow.png'},
+                        {type: 'image', key: 'title', url: 'img/titleransom.png'},
+                        {type: 'image', key: 'start', url: 'img/startbutton.png'},
                     ]
                 }
             });
@@ -57,8 +59,8 @@ const Preloader = new Phaser.Class({
     preload: function () {
         // setup the loading bar
         // note: images are available during preload because of the pack-property in the constructor
-        this.loadingbar_bg = this.add.sprite(400, 300, "loadingbar_bg");
-        this.loadingbar_fill = this.add.sprite(400, 300, "loadingbar_fill");
+        this.loadingbar_bg = this.add.sprite(640, 360, "loadingbar_bg");
+        this.loadingbar_fill = this.add.sprite(640, 360, "loadingbar_fill");
         this.setPreloadSprite(this.loadingbar_fill);
 
         // sprites sheets
@@ -71,6 +73,7 @@ const Preloader = new Phaser.Class({
 
         // Audio
         // Songs
+        this.load.audio('ost_ransom', 'snd/ost_ransom.mp3');
         this.load.audio('ost_bro', 'snd/ost_bro.mp3');
 
         // SFX
