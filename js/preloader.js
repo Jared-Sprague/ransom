@@ -22,6 +22,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'bow', url: 'img/bow.png'},
                         {type: 'image', key: 'title', url: 'img/titleransom.png'},
                         {type: 'image', key: 'start', url: 'img/startbutton.png'},
+                        {type: 'image', key: 'fireball', url: 'img/fireball.png'},
                     ]
                 }
             });
@@ -68,6 +69,7 @@ const Preloader = new Phaser.Class({
         this.load.atlas('sprites', 'img/spritearray.png', 'img/spritearray.json');
         this.load.atlas('puzzle_bar', 'img/bar_sheet2.png', 'img/bar_array.json');
         this.load.atlas('bar_open', 'img/bar_open_sheet.png', 'img/bar_open_array.json');
+        this.load.atlas('boss', 'img/boss_sheet.png', 'img/boss_array.json');
 
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');
@@ -78,6 +80,7 @@ const Preloader = new Phaser.Class({
         this.load.audio('ost_bro', 'snd/ost_bro.mp3');
         this.load.audio('ost_boss_intro', 'snd/ost_boss_intro.mp3');
         this.load.audio('ost_boss_battle_main', 'snd/ost_boss_battle_main.mp3');
+
 
         // SFX
         this.load.audio('sfx_clunk', 'snd/sfx_clunk.mp3');
