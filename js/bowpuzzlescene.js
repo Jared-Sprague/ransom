@@ -35,6 +35,15 @@ let BowPuzzleScene = new Phaser.Class({
         let barsPositionY = 70;
         let startingAngle = 0;
 
+        // Animations
+        let frames = this.anims.generateFrameNames('puzzle_bar');
+        this.anims.create({
+            key: 'bar_slider',
+            frames: frames,
+            frameRate: 12,
+            repeat: -1
+        });
+
         // create the bars over the bow box
         for (let i = 0; i < totalBars; i++) {
             let bar = this.add.sprite(barsPositionX, barsPositionY += 100, 'puzzle_bar');
@@ -42,16 +51,7 @@ let BowPuzzleScene = new Phaser.Class({
             startingAngle -= 2;
             this.bars.push(bar);
 
-            // Animations
-            this.anims.create({
-                key: 'bar_slider',
-                frames: this.anims.generateFrameNames('puzzle_bar'),
-                frameRate: 12,
-                repeat: -1
-            });
-
-            bar.anims.play('bar_slider');
-
+            bar.anims.play('bar_slider', true, Phaser.Math.Between(0, frames.length - 1));
             bar.setInteractive();
 
             bar.on('pointerdown', () => {
@@ -72,7 +72,7 @@ let BowPuzzleScene = new Phaser.Class({
 
         for (let i = 0; i < this.bars.length; i++) {
             // noinspection JSValidateTypes
-            if (!this.bars[i].anims.isPaused || this.bars[i].anims.currentFrame.index !== 1) {
+            if (!this.bars[i].anims.isPaused || this.bars[i].anims.currentFrame.index !== 15) {
                 break;
             }
             else if (i + 1 === this.bars.length) {
