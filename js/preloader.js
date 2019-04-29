@@ -18,6 +18,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'loadingbar_fill', url: 'img/loadingbar_fill.png'},
                         {type: 'image', key: 'gameroom', url: 'img/startroom.png'},
                         {type: 'image', key: 'puzzleroom', url: 'img/puzzleroom.png'},
+                        {type: 'image', key: 'bossroom', url: 'img/bossroom.png'},
                         {type: 'image', key: 'bow', url: 'img/bow.png'},
                         {type: 'image', key: 'title', url: 'img/titleransom.png'},
                         {type: 'image', key: 'start', url: 'img/startbutton.png'},
@@ -75,6 +76,8 @@ const Preloader = new Phaser.Class({
         // Songs
         this.load.audio('ost_ransom', 'snd/ost_ransom.mp3');
         this.load.audio('ost_bro', 'snd/ost_bro.mp3');
+        this.load.audio('ost_boss_intro', 'snd/ost_boss_intro.mp3');
+        this.load.audio('ost_boss_battle_main', 'snd/ost_boss_battle_main.mp3');
 
         // SFX
         this.load.audio('sfx_clunk', 'snd/sfx_clunk.mp3');

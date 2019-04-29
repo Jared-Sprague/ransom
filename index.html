@@ -6,6 +6,7 @@
     <script src="js/preloader.js"></script> 
     <script src="js/menu_scene.js"></script>
     <script src="js/bowpuzzle_scene.js"></script>
+    <script src="js/boss_scene.js"></script>
     <script src="js/tutorial_scene.js"></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
 					gravity: 0
 				}
 			},
-		scene: [ Preloader, MainMenuScene, TutorialScene, BowPuzzleScene ]
+		scene: [ Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene ]
 	};
 
 	let game = new Phaser.Game(config);
