@@ -14,6 +14,18 @@ let BossScene = new Phaser.Class({
         this.fireballs = [];
         this.bowCooldown = false;
 
+        // boss particle death
+        this.particles = this.add.particles('particles');
+        this.particles.createEmitter({
+            frame: ['purple', 'gray', 'black'],
+            angle: { min: 0, max: 360, steps: 32 },
+            lifespan: 2000,
+            speed: 400,
+            quantity: 32,
+            scale: { start: 3, end: 0 },
+            on: false
+        });
+
         // Add audio
         this.bossIntoMusic = this.sound.add('ost_boss_intro');
         this.bossBattleMainMusic = this.sound.add('ost_boss_battle_main', {loop: true});
@@ -31,6 +43,7 @@ let BossScene = new Phaser.Class({
         this.boss.setInteractive();
         this.boss.setCollideWorldBounds(true);
         this.boss.body.setSize(135, 300);
+        this.boss.setData("hp", 40);
 
         this.boss.on('pointerdown', () => {
            // shoot arrow at boss
@@ -59,7 +72,7 @@ let BossScene = new Phaser.Class({
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Start boss firing
-        setInterval(() => {
+        this.fireballInterval = setInterval(() => {
             this.bossFire();
         }, 1000);
     },
@@ -120,6 +133,20 @@ let BossScene = new Phaser.Class({
 
     doOverlapArrow: function (boss, arrow) {
         boss.setTint(0xff0000);
+        let bossHP = boss.getData("hp");
+
+        if (bossHP > 0) {
+            bossHP--;
+            console.log("boss hp: ", bossHP);
+            boss.setData('hp', bossHP);
+        } else {
+            // boss is dead!  Do end game stuff
+            clearInterval(this.fireballInterval);
+            this.particles.emitParticleAt(this.boss.x, this.boss.y);
+            this.boss.destroy();
+            this.playerStand();
+        }
+
         setTimeout(() => {
             boss.clearTint();
         }, 200);

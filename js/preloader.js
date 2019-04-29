@@ -72,6 +72,7 @@ const Preloader = new Phaser.Class({
         this.load.atlas('bar_open', 'img/bar_open_sheet.png', 'img/bar_open_array.json');
         this.load.atlas('boss', 'img/boss_sheet.png', 'img/boss_array.json');
         this.load.atlas('boy_fight', 'img/boy_fight_sheet.png', 'img/boy_fight_array.json');
+        this.load.atlas('particles', 'img/particle_sheet.png', 'img/particle_array.json');
 
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');
