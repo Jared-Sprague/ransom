@@ -32,7 +32,7 @@ let BowPuzzleScene = new Phaser.Class({
     },
 
     doBack: function () {
-        this.scene.start('mainmenu');
+        this.scene.start('lobby');
     },
 
     createBars: function () {
