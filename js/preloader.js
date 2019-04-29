@@ -74,11 +74,13 @@ const Preloader = new Phaser.Class({
         // font
         this.load.bitmapFont('fontwhite', 'img/fontwhite.png', 'img/fontwhite.xml');
 
-        // sound effects
-        //this.load.audio('bg', [this.p('audio/bg.mp3'),this.p('audio/bg.ogg')]);
-        this.load.audio('coin', ['snd/coin.mp3', 'snd/coin.ogg']);
-        this.load.audio('bomb', ['snd/expl.mp3', 'snd/expl.ogg']);
-        this.load.audio('btn', ['snd/btn.mp3', 'snd/btn.ogg']);
+        // Audio
+        // Songs
+        this.load.audio('ost_bro', 'snd/ost_bro.mp3');
+
+        // SFX
+        this.load.audio('sfx_clunk', 'snd/sfx_clunk.mp3');
+        this.load.audio('sfx_stone', 'snd/sfx_stone_slide.mp3');
     },
 
     create: function () {

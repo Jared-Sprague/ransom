@@ -13,6 +13,13 @@ let BowPuzzleScene = new Phaser.Class({
         // Add the bow
         let bowSprite = this.add.sprite(150, 270, 'bow');
 
+        // Add audio
+        this.music = this.sound.add('ost_bro', {loop: true});
+        this.sfx_clunk = this.sound.add('sfx_clunk');
+        this.sfx_stone = this.sound.add('sfx_stone');
+
+        this.music.play();
+
         this.createBars();
     },
 
@@ -56,6 +63,7 @@ let BowPuzzleScene = new Phaser.Class({
 
             bar.on('pointerdown', () => {
                 console.log('clicked!!');
+                this.sfx_clunk.play();
 
                 if (bar.anims.isPaused) {
                     bar.anims.resume();
@@ -107,6 +115,8 @@ let BowPuzzleScene = new Phaser.Class({
             frameRate: 4,
             repeat: 0
         });
+
+        this.sfx_stone.play();
 
         // create the bars over the bow box
         for (let i = 0; i < totalBars; i++) {
