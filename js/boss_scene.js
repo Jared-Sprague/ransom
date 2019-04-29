@@ -2,11 +2,13 @@ let BossScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function () {
+    initialize: function (data) {
         Phaser.Scene.call(this, {key: 'boss_scene'});
     },
 
-    create: function () {
+    create: function (data) {
+        this.life = data.life;
+
         // Background image
         this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
 
@@ -31,6 +33,7 @@ let BossScene = new Phaser.Class({
         this.bossBattleMainMusic = this.sound.add('ost_boss_battle_main', {loop: true});
         this.bowShootSfx = this.sound.add('sfx_bow_shoot');
         this.hitSfx = this.sound.add('sfx_hit');
+        this.victorySfx = this.sound.add('sfx_power_up');
 
         this.bossIntoMusic.once("complete", () => {
             this.bossBattleMainMusic.play();
@@ -43,7 +46,7 @@ let BossScene = new Phaser.Class({
         this.boss.setInteractive();
         this.boss.setCollideWorldBounds(true);
         this.boss.body.setSize(135, 300);
-        this.boss.setData("hp", 40);
+        this.boss.setData("hp", 5);
 
         this.boss.on('pointerdown', () => {
            // shoot arrow at boss
@@ -145,6 +148,8 @@ let BossScene = new Phaser.Class({
             this.particles.emitParticleAt(this.boss.x, this.boss.y);
             this.boss.destroy();
             this.playerStand();
+            this.bossBattleMainMusic.stop();
+            this.victorySfx.play();
         }
 
         setTimeout(() => {
