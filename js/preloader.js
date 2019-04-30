@@ -134,7 +134,7 @@ const Preloader = new Phaser.Class({
         this.preloadSprite = null;
 
         // start actual game
-        this.scene.start('controller_scene');
-        // this.scene.start('mainmenu');
+        // this.scene.start('bowpuzzlescene');
+        this.scene.start('mainmenu');
     }
 });

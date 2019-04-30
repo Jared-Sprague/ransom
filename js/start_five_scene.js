@@ -17,6 +17,7 @@ let StartFiveScene = new Phaser.Class({
         // Add background image
         this.add.image(0, 0, 'tvscreen2').setOrigin(0, 0);
 
+        this.createLifeBar();
 
         // Add try again button
         let nextButton = this.add.sprite(850, 600, 'nextbutton').setOrigin(0, 0);
@@ -34,6 +35,11 @@ let StartFiveScene = new Phaser.Class({
     doNext: function () {
         // this.music.stop();
         this.scene.start('controller_scene');
+    },
+
+    createLifeBar: function () {
+        this.add.image(900, 40, 'emptybar').setOrigin(0, 0);
+        this.add.image(908, 47, 'fullbar').setOrigin(0, 0);
     }
 
 });

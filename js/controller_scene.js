@@ -39,8 +39,10 @@ let ControllerScene = new Phaser.Class({
 
     doA: function () {
         // this.music.stop();
-        // this.scene.start('controller_scene');
         console.log("A button clicked");
+
+        // go to lobby
+        this.scene.start('lobby_scene', {life: 100});
     },
 
 
@@ -49,6 +51,8 @@ let ControllerScene = new Phaser.Class({
         // this.music.stop();
         // this.scene.start('controller_scene');
         console.log("B button clicked");
+
+        // go to game over
     }
 
 });
