@@ -11,10 +11,10 @@ let ControllerScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
+    create: function (data) {
         // Add background image
         this.add.image(0, 0, 'controller').setOrigin(0, 0);
-
+        this.music = data.music;
 
         // Add A button
         let aButton = this.add.sprite(800, 265, 'a_button');
@@ -31,14 +31,12 @@ let ControllerScene = new Phaser.Class({
         bButton.on('pointerup', () => {
             this.doB();
         });
-
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
     },
 
 
     doA: function () {
-        // this.music.stop();
+        this.music.stop();
+
         console.log("A button clicked");
 
         // go to lobby
@@ -48,8 +46,8 @@ let ControllerScene = new Phaser.Class({
 
 
     doB: function () {
-        // this.music.stop();
-        // this.scene.start('controller_scene');
+        this.music.stop();
+
         console.log("B button clicked");
 
         // go to game over

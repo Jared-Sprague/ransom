@@ -12,9 +12,10 @@ let StartTwoScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
+    create: function (data) {
         // Add background image
         this.add.image(0, 0, 'portal2').setOrigin(0, 0);
+        this.music = data.music;
 
 
         // Add try again button
@@ -25,14 +26,12 @@ let StartTwoScene = new Phaser.Class({
             this.doNext();
         });
 
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
     },
 
 
     doNext: function () {
         // this.music.stop();
-        this.scene.start('start_three_scene');
+        this.scene.start('start_three_scene', {music: this.music});
     }
 
 });

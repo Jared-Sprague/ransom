@@ -13,10 +13,10 @@ let StartFourScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
+    create: function (data) {
         // Add background image
         this.add.image(0, 0, 'tvscreen').setOrigin(0, 0);
-
+        this.music = data.music;
 
         // Add try again button
         let nextButton = this.add.sprite(850, 600, 'nextbutton').setOrigin(0, 0);
@@ -25,15 +25,12 @@ let StartFourScene = new Phaser.Class({
         nextButton.on('pointerup', () => {
             this.doNext();
         });
-
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
     },
 
 
     doNext: function () {
         // this.music.stop();
-        this.scene.start('start_five_scene');
+        this.scene.start('start_five_scene', {music: this.music});
     }
 
 });

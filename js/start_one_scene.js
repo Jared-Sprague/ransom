@@ -25,14 +25,13 @@ let StartOneScene = new Phaser.Class({
             this.doNext();
         });
 
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
+        this.music = this.sound.add('ost_portal_opens', {loop: true});
+        this.music.play();
     },
 
 
     doNext: function () {
-        // this.music.stop();
-        this.scene.start('start_two_scene');
+        this.scene.start('start_two_scene', {music: this.music});
     }
 
 });

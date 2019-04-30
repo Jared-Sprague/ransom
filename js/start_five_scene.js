@@ -13,9 +13,10 @@ let StartFiveScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
+    create: function (data) {
         // Add background image
         this.add.image(0, 0, 'tvscreen2').setOrigin(0, 0);
+        this.music = data.music;
 
         this.createLifeBar();
 
@@ -27,14 +28,12 @@ let StartFiveScene = new Phaser.Class({
             this.doNext();
         });
 
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
     },
 
 
     doNext: function () {
         // this.music.stop();
-        this.scene.start('controller_scene');
+        this.scene.start('controller_scene', {music: this.music});
     },
 
     createLifeBar: function () {
