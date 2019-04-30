@@ -12,6 +12,8 @@ let LobbyScene = new Phaser.Class({
     },
 
     create: function (data) {
+        this.forceFieldActive = true;
+
         // Add background image
         this.add.image(0, 0, 'underworldlobby').setOrigin(0, 0);
 
@@ -21,29 +23,27 @@ let LobbyScene = new Phaser.Class({
         this.life = data.life;
         this.createLifeBar();
 
+        // Puzzle Door
+        let puzzleDoor = this.add.sprite(0, 270, 'puzzle_door').setOrigin(0, 0);
+        puzzleDoor.setInteractive();
+
+        puzzleDoor.on('pointerup', () => {
+            this.doPuzzleDoor();
+        });
+
+        // Boss Door
+        let bossDoor = this.add.sprite(1208, 277, 'boss_door').setOrigin(0, 0);
+        bossDoor.setInteractive();
+
+        bossDoor.on('pointerup', () => {
+            this.doBossDoor();
+        });
 
         // TODO: remove this sprite if puzzle room was solved
-        let forceField = this.add.sprite(1200, 400, 'forcefield');
-        forceField.setScale(1, 1.6);
-
-        // Add A button
-        // let aButton = this.add.sprite(800, 265, 'a_button');
-        // aButton.setInteractive();
-        //
-        // aButton.on('pointerup', () => {
-        //     this.doA();
-        // });
-        //
-        // // Add B button
-        // let bButton = this.add.sprite(755, 315, 'b_button');
-        // bButton.setInteractive();
-        //
-        // bButton.on('pointerup', () => {
-        //     this.doB();
-        // });
-
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
+        if (this.forceFieldActive) {
+            let forceField = this.add.sprite(1200, 400, 'forcefield');
+            forceField.setScale(1, 1.6);
+        }
     },
 
     update: function () {
@@ -51,22 +51,25 @@ let LobbyScene = new Phaser.Class({
     },
 
 
-    doA: function () {
+    doPuzzleDoor: function () {
         // this.music.stop();
-        // this.scene.start('controller_scene');
-        console.log("A button clicked");
 
-        // go to lobby
+        console.log("puzle door clicked");
+
+        // go to puzzle room
+        this.scene.start('bowpuzzlescene', {life: this.life});
     },
 
 
 
-    doB: function () {
-        // this.music.stop();
-        // this.scene.start('controller_scene');
-        console.log("B button clicked");
+    doBossDoor: function () {
+        if (this.forceFieldActive) return;
 
-        // go to game over
+        this.music.stop();
+        // this.scene.start('controller_scene');
+        console.log("boss door clicked");
+
+        // go to boss room
     },
 
     createLifeBar: function () {

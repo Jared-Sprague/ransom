@@ -6,29 +6,29 @@ let BowPuzzleScene = new Phaser.Class({
         Phaser.Scene.call(this, {key: 'bowpuzzlescene'});
     },
 
-    create: function () {
+    create: function (data) {
         // Background image
         this.add.image(0, 0, 'puzzleroom').setOrigin(0, 0);
+
+        // Add the life bar
+        this.life = data.life;
+        this.createLifeBar();
 
         // Add the bow
         let bowSprite = this.add.sprite(150, 270, 'bow');
 
         // Add audio
-        this.music = this.sound.add('ost_bro', {loop: true});
+        // this.music = this.sound.add('ost_bro', {loop: true});
         this.sfx_clunk = this.sound.add('sfx_clunk');
         this.sfx_stone = this.sound.add('sfx_stone');
 
-        this.music.play();
+        // this.music.play();
 
         this.createBars();
     },
 
     update: function (time, delta) {
-
-    },
-
-    movePlayer: function (dir) {
-
+        this.lifeBar.setScale(this.life / 100, 1);
     },
 
     doBack: function () {
@@ -127,5 +127,12 @@ let BowPuzzleScene = new Phaser.Class({
 
             bar.anims.play('open_bar');
         }
+    },
+
+    createLifeBar: function () {
+        this.add.image(900, 40, 'emptybar').setOrigin(0, 0);
+        this.lifeBar = this.add.image(908, 47, 'fullbar').setOrigin(0, 0);
+
+        this.lifeBar.setScale(this.life / 100, 1);
     }
  });
