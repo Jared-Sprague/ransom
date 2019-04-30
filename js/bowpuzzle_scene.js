@@ -10,21 +10,43 @@ let BowPuzzleScene = new Phaser.Class({
         // Background image
         this.add.image(0, 0, 'puzzleroom').setOrigin(0, 0);
 
+        // State
+        this.puzzleSolved = false;
+
         // Add the life bar
         this.life = data.life;
+        this.music = data.music;
         this.createLifeBar();
 
         // Add the bow
-        let bowSprite = this.add.sprite(150, 270, 'bow');
+        this.bowSprite = this.add.sprite(150, 270, 'bow');
+        this.bowSprite.setInteractive();
+        this.bowSprite.on('pointerdown', () => {
+            if (this.puzzleSolved) {
+                console.log('Pick up bow');
+                this.sfx_clunk.play();
+                this.boy.setTexture('bow_raised');
+                this.music.stop();
+                this.sfx_power_up.play();
+                this.bowSprite.destroy();
+            }
+        });
+
+        this.createBars();
+
+        // add boy
+        this.boy = this.physics.add.sprite(355, 350, 'boy_fight');
+        this.boy.setScale(0.6);
+        this.boy.flipX = true;
 
         // Add audio
         // this.music = this.sound.add('ost_bro', {loop: true});
         this.sfx_clunk = this.sound.add('sfx_clunk');
         this.sfx_stone = this.sound.add('sfx_stone');
-
-        // this.music.play();
-
-        this.createBars();
+        this.sfx_power_up = this.sound.add('sfx_power_up');
+        this.sfx_power_up.once("complete", () => {
+            this.scene.start('lobby_scene', {life: this.life, puzzleSolved: true});
+        });
     },
 
     update: function (time, delta) {
@@ -90,6 +112,7 @@ let BowPuzzleScene = new Phaser.Class({
             else if (i + 1 === this.lockedBars.length) {
                 // all bars paused at correct index
                 console.log("UNLOCKED!");
+                this.puzzleSolved = true;
                 this.unlockBars();
             }
         }

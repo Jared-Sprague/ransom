@@ -41,6 +41,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'forcefield', url: 'img/forcefield.png'},
                         {type: 'image', key: 'puzzle_door', url: 'img/puzzle_door.png'},
                         {type: 'image', key: 'boss_door', url: 'img/boss_door.png'},
+                        {type: 'image', key: 'bow_raised', url: 'img/bowraised.png'},
                     ]
                 }
             });

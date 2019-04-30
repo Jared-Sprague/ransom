@@ -44,6 +44,10 @@ let LobbyScene = new Phaser.Class({
             let forceField = this.add.sprite(1200, 400, 'forcefield');
             forceField.setScale(1, 1.6);
         }
+
+        // add boy
+        this.boy = this.physics.add.sprite(400, 500, 'boy_fight');
+        this.boy.setScale(0.4);
     },
 
     update: function () {
@@ -57,7 +61,7 @@ let LobbyScene = new Phaser.Class({
         console.log("puzle door clicked");
 
         // go to puzzle room
-        this.scene.start('bowpuzzlescene', {life: this.life});
+        this.scene.start('bowpuzzlescene', {life: this.life, music: this.music});
     },
 
 
