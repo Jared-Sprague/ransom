@@ -18,7 +18,7 @@ let StartOneScene = new Phaser.Class({
 
 
         // Add try again button
-        let nextButton = this.add.sprite(850, 600, 'nextbutton').setOrigin(0, 0);
+        let nextButton = this.add.sprite(950, 600, 'nextbutton').setOrigin(0, 0);
         nextButton.setInteractive();
 
         nextButton.on('pointerup', () => {

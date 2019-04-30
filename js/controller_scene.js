@@ -51,7 +51,7 @@ let ControllerScene = new Phaser.Class({
         console.log("B button clicked");
 
         // go to game over
-        this.scene.start('badend_scene', {fromController: true});
+        this.scene.start('badend_scene', {fromScene: "controller"});
     }
 
 });

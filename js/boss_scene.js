@@ -49,7 +49,7 @@ let BossScene = new Phaser.Class({
                     this.life = 0;
                     clearInterval(this.fireballInterval);
                     this.bossBattleMainMusic.stop();
-                    this.scene.start('badend_scene');
+                    this.scene.start('badend_scene', {fromScene: "boss"});
                 }
             }
         }, 1000);
@@ -177,7 +177,8 @@ let BossScene = new Phaser.Class({
                 this.life = 0;
                 console.log("player died");
                 clearInterval(this.fireballInterval);
-                this.scene.start('badend_scene');
+                this.bossBattleMainMusic.stop();
+                this.scene.start('badend_scene', {fromScene: "boss"});
             }
         }
 
