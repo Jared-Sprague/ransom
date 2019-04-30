@@ -12,10 +12,16 @@ let GoodEndScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
-        // Add background image
-        this.add.image(0, 0, 'goodend').setOrigin(0, 0);
+    create: function (data) {
+        this.life = data.life;
 
+        // Add background image
+        if (this.life > 50) {
+            this.add.image(0, 0, 'goodend').setOrigin(0, 0);
+        }
+        else {
+            this.add.image(0, 0, 'decentend').setOrigin(0, 0);
+        }
 
         // Add try again button
         let tryAgainButton = this.add.sprite(850, 600, 'tryagain').setOrigin(0, 0);

@@ -43,6 +43,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'boss_door', url: 'img/boss_door.png'},
                         {type: 'image', key: 'bow_raised', url: 'img/bowraised.png'},
                         {type: 'image', key: 'goodend', url: 'img/goodend.png'},
+                        {type: 'image', key: 'decentend', url: 'img/decentend.png'},
                         {type: 'image', key: 'sign', url: 'img/sign.png'},
                         {type: 'image', key: 'sign_closeup', url: 'img/sign_closeup.png'},
                     ]
