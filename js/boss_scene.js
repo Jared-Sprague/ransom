@@ -12,6 +12,8 @@ let BossScene = new Phaser.Class({
         // Background image
         this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
 
+        this.createLifeBar();
+
         // State
         this.fireballs = [];
         this.bowCooldown = false;
@@ -92,6 +94,8 @@ let BossScene = new Phaser.Class({
         if (this.cursors.shift.isUp && this.boy.getData("ducking") === "true") {
             this.playerStand();
         }
+
+        this.lifeBar.setScale(this.life / 100, 1);
     },
 
     movePlayer: function (dir) {
@@ -127,6 +131,18 @@ let BossScene = new Phaser.Class({
     doOverlapFireball: function (boy, fireball) {
         boy.setTint(0xff0000);
         this.hitSfx.play();
+
+        if (this.life > 0) {
+            this.life -= 5;
+            if (this.life <= 0) {
+                // Player died, transition to end state
+                this.life = 0;
+                console.log("player died");
+                clearInterval(this.fireballInterval);
+                this.scene.start('badend_scene');
+            }
+        }
+
         setTimeout(() => {
             boy.clearTint();
         }, 200);
@@ -244,5 +260,12 @@ let BossScene = new Phaser.Class({
                 this.bowCooldown = false;
             }, 300);
         }
+    },
+
+    createLifeBar: function () {
+        this.add.image(900, 40, 'emptybar').setOrigin(0, 0);
+        this.lifeBar = this.add.image(908, 47, 'fullbar').setOrigin(0, 0);
+
+        this.lifeBar.setScale(this.life / 100, 1);
     }
  });

@@ -7,6 +7,7 @@
     <script src="js/menu_scene.js"></script>
     <script src="js/bowpuzzle_scene.js"></script>
     <script src="js/boss_scene.js"></script>
+    <script src="js/badend_scene.js"></script>
     <script src="js/tutorial_scene.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
                 debug: false,
             }
         },
-        scene: [Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene]
+        scene: [Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene, BadEndScene]
     };
 
     let game = new Phaser.Game(config);
