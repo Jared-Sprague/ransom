@@ -34,6 +34,25 @@ let LobbyScene = new Phaser.Class({
         this.life = data.life;
         this.createLifeBar();
 
+        // start decrementing life
+        this.lifeInterval = setInterval(() => {
+            if (this.life > 0) {
+                this.life--;
+                if (this.life <= 0) {
+                    // Player died, transition to end state
+                    this.life = 0;
+                    console.log("player died");
+                    this.music.stop();
+                    this.scene.start('badend_scene');
+                }
+            }
+        }, 1000);
+
+        this.events.on('shutdown', () => {
+            console.log("shutdown");
+            clearInterval(this.lifeInterval);
+        });
+
         // Puzzle Door
         let puzzleDoor = this.add.sprite(0, 270, 'puzzle_door').setOrigin(0, 0);
         puzzleDoor.setInteractive();
@@ -117,6 +136,5 @@ let LobbyScene = new Phaser.Class({
         this.lifeBar = this.add.image(908, 47, 'fullbar').setOrigin(0, 0);
 
         this.lifeBar.setScale(this.life / 100, 1);
-    }
-
+    },
 });

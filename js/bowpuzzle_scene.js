@@ -18,6 +18,25 @@ let BowPuzzleScene = new Phaser.Class({
         this.music = data.music;
         this.createLifeBar();
 
+        // start decrementing life
+        this.lifeInterval = setInterval(() => {
+            if (this.life > 0) {
+                this.life--;
+                if (this.life <= 0) {
+                    // Player died, transition to end state
+                    this.life = 0;
+                    console.log("player died");
+                    this.music.stop();
+                    this.scene.start('badend_scene');
+                }
+            }
+        }, 1000);
+
+        this.events.on('shutdown', () => {
+            console.log("shutdown");
+            clearInterval(this.lifeInterval);
+        });
+
         // Add the bow
         this.bowSprite = this.add.sprite(150, 270, 'bow');
         this.bowSprite.setInteractive();

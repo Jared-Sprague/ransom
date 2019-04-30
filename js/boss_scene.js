@@ -14,6 +14,33 @@ let BossScene = new Phaser.Class({
 
         this.createLifeBar();
 
+        // Add audio
+        this.bossIntoMusic = this.sound.add('ost_boss_intro');
+        this.bossBattleMainMusic = this.sound.add('ost_boss_battle_main', {loop: true});
+        this.bowShootSfx = this.sound.add('sfx_bow_shoot');
+        this.hitSfx = this.sound.add('sfx_hit');
+        this.victorySfx = this.sound.add('sfx_power_up');
+        this.bossBattleMainMusic.play();
+
+        // start decrementing life
+        this.lifeInterval = setInterval(() => {
+            if (this.life > 0) {
+                this.life--;
+                if (this.life <= 0) {
+                    // Player died, transition to end state
+                    this.life = 0;
+                    console.log("player died");
+                    this.bossBattleMainMusic.stop();
+                    this.scene.start('badend_scene');
+                }
+            }
+        }, 1000);
+
+        this.events.on('shutdown', () => {
+            console.log("shutdown");
+            clearInterval(this.lifeInterval);
+        });
+
         // State
         this.fireballs = [];
         this.bowCooldown = false;
@@ -29,14 +56,6 @@ let BossScene = new Phaser.Class({
             scale: { start: 3, end: 0 },
             on: false
         });
-
-        // Add audio
-        this.bossIntoMusic = this.sound.add('ost_boss_intro');
-        this.bossBattleMainMusic = this.sound.add('ost_boss_battle_main', {loop: true});
-        this.bowShootSfx = this.sound.add('sfx_bow_shoot');
-        this.hitSfx = this.sound.add('sfx_hit');
-        this.victorySfx = this.sound.add('sfx_power_up');
-        this.bossBattleMainMusic.play();
 
         // this.bossIntoMusic.once("complete", () => {
         //     this.bossBattleMainMusic.play();
