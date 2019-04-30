@@ -28,8 +28,9 @@ let BossScene = new Phaser.Class({
                 this.life--;
                 if (this.life <= 0) {
                     // Player died, transition to end state
-                    this.life = 0;
                     console.log("player died");
+                    this.life = 0;
+                    clearInterval(this.fireballInterval);
                     this.bossBattleMainMusic.stop();
                     this.scene.start('badend_scene');
                 }
@@ -68,7 +69,7 @@ let BossScene = new Phaser.Class({
         this.boss.setInteractive();
         this.boss.setCollideWorldBounds(true);
         this.boss.body.setSize(135, 300);
-        this.boss.setData("hp", 5);
+        this.boss.setData("hp", 30);
 
         this.boss.on('pointerdown', () => {
            // shoot arrow at boss
