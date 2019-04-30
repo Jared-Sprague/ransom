@@ -10,7 +10,24 @@ let BossScene = new Phaser.Class({
         this.life = data.life;
 
         // Background image
-        this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
+        this.background = this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
+        this.background.setInteractive();
+        this.background.on('pointerdown', () => {
+            // shoot arrow at boss
+            if (this.boy.getData("standing") === "true") {
+                this.boy.setFrame('bowdrawn');
+                this.boy.body.setOffset(60, 50);
+            }
+        });
+
+        this.background.on('pointerup', () => {
+            // shoot arrow at boss
+            if (this.boy.getData("standing") === "true") {
+                this.boy.setFrame('bowholding');
+                this.playerShoot();
+                this.boy.body.setOffset(60, 50);
+            }
+        });
 
         this.createLifeBar();
 
