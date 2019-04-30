@@ -40,11 +40,14 @@ let BowPuzzleScene = new Phaser.Class({
         // Add the bow
         this.bowSprite = this.add.sprite(150, 270, 'bow');
         this.bowSprite.setInteractive();
+
+        // bow click action
         this.bowSprite.on('pointerdown', () => {
             if (this.puzzleSolved) {
                 console.log('Pick up bow');
                 this.sfx_clunk.play();
                 this.boy.setTexture('bow_raised');
+                this.boy.setDepth(1); // bring to top
                 this.music.stop();
                 this.sfx_power_up.play();
                 this.bowSprite.destroy();
