@@ -105,6 +105,7 @@ const Preloader = new Phaser.Class({
         this.load.audio('ost_bro', 'snd/ost_bro.mp3');
         this.load.audio('ost_boss_intro', 'snd/ost_boss_intro.mp3');
         this.load.audio('ost_boss_battle_main', 'snd/ost_boss_battle_main.mp3');
+        this.load.audio('ost_bro_why', 'snd/ost_bro_why.mp3');
 
 
         // SFX
@@ -144,6 +145,6 @@ const Preloader = new Phaser.Class({
         // start actual game
         // this.scene.start('bowpuzzlescene');
         // this.scene.start('mainmenu');
-        this.scene.start('lobby_scene', {life: 100});
+        this.scene.start('lobby_scene', {life: 10});
     }
 });

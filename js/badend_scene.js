@@ -16,6 +16,8 @@ let BadEndScene = new Phaser.Class({
         // Add background image
         this.add.image(0, 0, 'badend').setOrigin(0, 0);
 
+        this.music = this.sound.add('ost_bro_why');
+        this.music.play();
 
         // Add try again button
         let tryAgainButton = this.add.sprite(850, 600, 'tryagain').setOrigin(0, 0);
@@ -24,14 +26,11 @@ let BadEndScene = new Phaser.Class({
         tryAgainButton.on('pointerup', () => {
             this.doTryAgain();
         });
-
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
     },
 
 
     doTryAgain: function () {
-        // this.music.stop();
+        this.music.stop();
         this.scene.start('mainmenu');
     }
 
