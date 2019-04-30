@@ -1,5 +1,3 @@
-// Phaser3 example game
-// tutorial scene
 
 let TutorialScene = new Phaser.Class({
 

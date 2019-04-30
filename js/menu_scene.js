@@ -1,5 +1,3 @@
-// Phaser3 example game
-// mein menu scene
 
 let MainMenuScene = new Phaser.Class({
 

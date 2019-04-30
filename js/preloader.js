@@ -35,6 +35,9 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'tvscreen2', url: 'img/tvscreen2.png'},
                         {type: 'image', key: 'underworldlobby', url: 'img/underworldlobby.png'},
                         {type: 'image', key: 'nextbutton', url: 'img/nextbutton.png'},
+                        {type: 'image', key: 'controller', url: 'img/controller.png'},
+                        {type: 'image', key: 'a_button', url: 'img/a_button.png'},
+                        {type: 'image', key: 'b_button', url: 'img/b_button.png'},
                     ]
                 }
             });
@@ -131,6 +134,7 @@ const Preloader = new Phaser.Class({
         this.preloadSprite = null;
 
         // start actual game
-        this.scene.start('mainmenu');
+        this.scene.start('controller_scene');
+        // this.scene.start('mainmenu');
     }
 });

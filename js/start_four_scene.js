@@ -1,5 +1,4 @@
-// Phaser3 example game
-// mein menu scene
+
 
 let StartFourScene = new Phaser.Class({
 
