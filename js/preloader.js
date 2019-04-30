@@ -28,6 +28,13 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'fullbar', url: 'img/fullbar.png'},
                         {type: 'image', key: 'emptybar', url: 'img/emptybar.png'},
                         {type: 'image', key: 'badend', url: 'img/badend.png'},
+                        {type: 'image', key: 'portal1', url: 'img/portal1.png'},
+                        {type: 'image', key: 'portal2', url: 'img/portal2.png'},
+                        {type: 'image', key: 'portal3', url: 'img/portal3.png'},
+                        {type: 'image', key: 'tvscreen', url: 'img/tvscreen.png'},
+                        {type: 'image', key: 'tvscreen2', url: 'img/tvscreen2.png'},
+                        {type: 'image', key: 'underworldlobby', url: 'img/underworldlobby.png'},
+                        {type: 'image', key: 'nextbutton', url: 'img/nextbutton.png'},
                     ]
                 }
             });
