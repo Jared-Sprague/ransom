@@ -24,7 +24,7 @@ let BadEndScene = new Phaser.Class({
         tryAgainButton.setInteractive();
 
         tryAgainButton.on('pointerup', () => {
-            this.doStart();
+            this.doTryAgain();
         });
 
         // this.music = this.sound.add('ost_ransom', {loop: true});
@@ -34,8 +34,7 @@ let BadEndScene = new Phaser.Class({
 
     doTryAgain: function () {
         // this.music.stop();
-        // this.scene.start('boss_scene', {life: 100});
-        // this.scene.start('bowpuzzlescene');
+        this.scene.start('mainmenu');
     }
 
 });
