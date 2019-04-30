@@ -46,6 +46,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'decentend', url: 'img/decentend.png'},
                         {type: 'image', key: 'sign', url: 'img/sign.png'},
                         {type: 'image', key: 'sign_closeup', url: 'img/sign_closeup.png'},
+                        {type: 'image', key: 'leavehim', url: 'img/leavehim.png'},
                     ]
                 }
             });
@@ -145,6 +146,7 @@ const Preloader = new Phaser.Class({
         // start actual game
         // this.scene.start('bowpuzzlescene');
         // this.scene.start('mainmenu');
-        this.scene.start('lobby_scene', {life: 10});
+        // this.scene.start('lobby_scene', {life: 10});
+        this.scene.start('controller_scene');
     }
 });

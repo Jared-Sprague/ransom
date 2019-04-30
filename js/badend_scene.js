@@ -12,9 +12,19 @@ let BadEndScene = new Phaser.Class({
     preload: function () {
     },
 
-    create: function () {
+    create: function (data) {
+        this.fromController = data.fromController;
+
         // Add background image
-        this.add.image(0, 0, 'badend').setOrigin(0, 0);
+        if (this.fromController) {
+            this.add.image(0, 0, 'leavehim').setOrigin(0, 0);
+        }
+        else {
+            this.add.image(0, 0, 'badend').setOrigin(0, 0);
+        }
+
+
+
 
         this.music = this.sound.add('ost_bro_why');
         this.music.play();
