@@ -12,13 +12,24 @@ let LobbyScene = new Phaser.Class({
     },
 
     create: function (data) {
-        this.forceFieldActive = true;
+        this.puzzleSolved = data.puzzleSolved;
+        this.bossForceFieldActive = !data.puzzleSolved;
+        this.puzzleForceFieldActive = data.puzzleSolved;
 
         // Add background image
-        this.add.image(0, 0, 'underworldlobby').setOrigin(0, 0);
+        this.add.image(0, 0, 'underworldlobby').setOrigin(0, 0)
 
-        this.music = this.sound.add('ost_bro', {loop: true});
-        this.music.play();
+        if (!data.music) {
+            this.music = this.sound.add('ost_bro', {loop: true});
+        }
+        else {
+            this.music = data.music;
+        }
+
+        if (!this.music.isPlaying) {
+            this.music.play();
+        }
+
 
         this.life = data.life;
         this.createLifeBar();
@@ -39,10 +50,24 @@ let LobbyScene = new Phaser.Class({
             this.doBossDoor();
         });
 
-        // TODO: remove this sprite if puzzle room was solved
-        if (this.forceFieldActive) {
-            let forceField = this.add.sprite(1200, 400, 'forcefield');
-            forceField.setScale(1, 1.6);
+        // Sign
+        let sign = this.add.sprite(565, 404, 'sign').setOrigin(0, 0);
+        sign.setInteractive();
+
+        sign.on('pointerup', () => {
+            this.doSign();
+        });
+
+
+        if (this.bossForceFieldActive) {
+            let bossField = this.add.sprite(1200, 400, 'forcefield');
+            bossField.setScale(1, 1.6);
+        }
+
+        if (this.puzzleForceFieldActive) {
+            let puzzleField = this.add.sprite(0, 170, 'forcefield').setOrigin(0, 0);
+            puzzleField.setScale(1, 1.4);
+            puzzleField.flipX = true;
         }
 
         // add boy
@@ -56,7 +81,7 @@ let LobbyScene = new Phaser.Class({
 
 
     doPuzzleDoor: function () {
-        // this.music.stop();
+        if (this.puzzleForceFieldActive) return;
 
         console.log("puzle door clicked");
 
@@ -67,13 +92,24 @@ let LobbyScene = new Phaser.Class({
 
 
     doBossDoor: function () {
-        if (this.forceFieldActive) return;
+        if (this.bossForceFieldActive) return;
 
         this.music.stop();
+
         // this.scene.start('controller_scene');
         console.log("boss door clicked");
 
         // go to boss room
+        this.scene.start('boss_scene', {life: this.life});
+    },
+
+    doSign: function () {
+        console.log("sign clicked");
+        this.scene.start('sign_scene', {
+            life: this.life,
+            puzzleSolved: this.puzzleSolved,
+            music: this.music,
+        });
     },
 
     createLifeBar: function () {

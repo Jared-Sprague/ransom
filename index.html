@@ -16,6 +16,8 @@
     <script src="js/start_five_scene.js"></script>
     <script src="js/controller_scene.js"></script>
     <script src="js/lobby_scene.js"></script>
+    <script src="js/goodend_scene.js"></script>
+    <script src="js/sign_scene.js"></script>
 </head>
 <body>
 
@@ -36,7 +38,23 @@
                 debug: false,
             }
         },
-        scene: [Preloader, MainMenuScene, TutorialScene, BowPuzzleScene, BossScene, BadEndScene, StartOneScene, StartTwoScene, StartThreeScene, StartFourScene, StartFiveScene, ControllerScene, LobbyScene]
+        scene: [
+            Preloader,
+            MainMenuScene,
+            TutorialScene,
+            BowPuzzleScene,
+            BossScene,
+            BadEndScene,
+            StartOneScene,
+            StartTwoScene,
+            StartThreeScene,
+            StartFourScene,
+            StartFiveScene,
+            ControllerScene,
+            LobbyScene,
+            GoodEndScene,
+            SignScene
+        ]
     };
 
     let game = new Phaser.Game(config);

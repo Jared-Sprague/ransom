@@ -36,12 +36,13 @@ let BossScene = new Phaser.Class({
         this.bowShootSfx = this.sound.add('sfx_bow_shoot');
         this.hitSfx = this.sound.add('sfx_hit');
         this.victorySfx = this.sound.add('sfx_power_up');
+        this.bossBattleMainMusic.play();
 
-        this.bossIntoMusic.once("complete", () => {
-            this.bossBattleMainMusic.play();
-        });
-
-        this.bossIntoMusic.play();
+        // this.bossIntoMusic.once("complete", () => {
+        //     this.bossBattleMainMusic.play();
+        // });
+        //
+        // this.bossIntoMusic.play();
 
         // Add boss
         this.boss = this.physics.add.sprite(1050, 500, 'boss');
@@ -165,6 +166,10 @@ let BossScene = new Phaser.Class({
             this.boss.destroy();
             this.playerStand();
             this.bossBattleMainMusic.stop();
+            this.victorySfx.once("complete", () => {
+                // Go to end screen
+                this.scene.start('goodend_scene', {life: this.life});
+            });
             this.victorySfx.play();
         }
 

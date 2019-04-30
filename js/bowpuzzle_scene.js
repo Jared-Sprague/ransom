@@ -45,7 +45,7 @@ let BowPuzzleScene = new Phaser.Class({
         this.sfx_stone = this.sound.add('sfx_stone');
         this.sfx_power_up = this.sound.add('sfx_power_up');
         this.sfx_power_up.once("complete", () => {
-            this.scene.start('lobby_scene', {life: this.life, puzzleSolved: true});
+            this.scene.start('lobby_scene', {life: this.life, puzzleSolved: true, music: this.music});
         });
     },
 
