@@ -38,6 +38,7 @@ const Preloader = new Phaser.Class({
                         {type: 'image', key: 'controller', url: 'img/controller.png'},
                         {type: 'image', key: 'a_button', url: 'img/a_button.png'},
                         {type: 'image', key: 'b_button', url: 'img/b_button.png'},
+                        {type: 'image', key: 'forcefield', url: 'img/forcefield.png'},
                     ]
                 }
             });
@@ -135,6 +136,7 @@ const Preloader = new Phaser.Class({
 
         // start actual game
         // this.scene.start('bowpuzzlescene');
-        this.scene.start('mainmenu');
+        // this.scene.start('mainmenu');
+        this.scene.start('lobby_scene');
     }
 });

@@ -21,6 +21,11 @@ let LobbyScene = new Phaser.Class({
         this.life = data.life;
         this.createLifeBar();
 
+
+        // TODO: remove this sprite if puzzle room was solved
+        let forceField = this.add.sprite(1200, 400, 'forcefield');
+        forceField.setScale(1, 1.6);
+
         // Add A button
         // let aButton = this.add.sprite(800, 265, 'a_button');
         // aButton.setInteractive();
