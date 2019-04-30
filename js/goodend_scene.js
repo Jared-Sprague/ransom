@@ -31,13 +31,14 @@ let GoodEndScene = new Phaser.Class({
             this.doTryAgain();
         });
 
-        // this.music = this.sound.add('ost_ransom', {loop: true});
-        // this.music.play();
+        this.music = this.sound.add('ost_gg_bro', {loop: true});
+        this.music.play();
+
     },
 
 
     doTryAgain: function () {
-        // this.music.stop();
+        this.music.stop();
         this.scene.start('mainmenu');
     }
 

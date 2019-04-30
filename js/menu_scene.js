@@ -27,14 +27,8 @@ let MainMenuScene = new Phaser.Class({
             this.doStart();
         });
 
-
-
         this.music = this.sound.add('ost_ransom', {loop: true});
         this.music.play();
-
-        // add tutorial and start button
-        // this.btnhelp = this.addButton(400 - 80, 400, 'sprites', this.doTutor, this, 'btn_quest_hl', 'btn_quest', 'btn_quest_hl', 'btn_quest');
-        // this.btnstart = this.addButton(400 + 80, 400, 'sprites', this.doStart, this, 'btn_play_hl', 'btn_play', 'btn_play_hl', 'btn_play');
 
         console.log('create is ready');
     },

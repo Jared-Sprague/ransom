@@ -108,6 +108,7 @@ const Preloader = new Phaser.Class({
         this.load.audio('ost_boss_battle_main', 'snd/ost_boss_battle_main.mp3');
         this.load.audio('ost_bro_why', 'snd/ost_bro_why.mp3');
         this.load.audio('ost_portal_opens', 'snd/ost_portal_opens.mp3');
+        this.load.audio('ost_gg_bro', 'snd/ost_gg_bro.mp3');
 
 
         // SFX
