@@ -16,7 +16,7 @@ let GoodEndScene = new Phaser.Class({
         this.life = data.life;
 
         // Add background image
-        if (this.life > 50) {
+        if (this.life > 30) {
             this.add.image(0, 0, 'goodend').setOrigin(0, 0);
         }
         else {

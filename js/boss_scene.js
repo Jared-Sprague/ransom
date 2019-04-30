@@ -86,7 +86,7 @@ let BossScene = new Phaser.Class({
         this.boss.setInteractive();
         this.boss.setCollideWorldBounds(true);
         this.boss.body.setSize(135, 300);
-        this.boss.setData("hp", 30);
+        this.boss.setData("hp", 35);
 
         this.boss.on('pointerdown', () => {
            // shoot arrow at boss
@@ -148,7 +148,7 @@ let BossScene = new Phaser.Class({
         this.tweens.add({
             targets: sprite,
             x: -100,
-            duration: 3000,
+            duration: 2250,
             ease: 'linear',
             onComplete: () => {
                 // clean up sprite when it goes off screen
@@ -171,7 +171,7 @@ let BossScene = new Phaser.Class({
         this.hitSfx.play();
 
         if (this.life > 0) {
-            this.life -= 5;
+            this.life -= 7;  // Fireball damage
             if (this.life <= 0) {
                 // Player died, transition to end state
                 this.life = 0;
@@ -222,9 +222,9 @@ let BossScene = new Phaser.Class({
             // add tween for boy to jump
             this.tweens.add({
                 targets: this.boy,
-                y: 250,
+                y: 300,
                 ease: 'Power1',
-                duration: 500,
+                duration: 400,
                 yoyo: true,
                 onStart: () => {
                     this.boy.setData("jumping", "true");
@@ -233,8 +233,8 @@ let BossScene = new Phaser.Class({
                     this.boy.setFrame('jump');
 
                     // change the physics collision area
-                    this.boy.body.setSize(180, 420, false);
-                    this.boy.body.setOffset(40, 50);
+                    this.boy.body.setSize(130, 420, false);
+                    this.boy.body.setOffset(90, 50);
                 },
                 onComplete: () => {
                     this.playerStand();
@@ -249,8 +249,8 @@ let BossScene = new Phaser.Class({
             this.boy.setFrame('duck');
 
             // change the physics collision area
-            this.boy.body.setSize(180, 320, false);
-            this.boy.body.setOffset(60, 300);
+            this.boy.body.setSize(130, 320, false);
+            this.boy.body.setOffset(110, 300);
         }
     },
 
@@ -259,8 +259,8 @@ let BossScene = new Phaser.Class({
         this.boy.setData("jumping", "false");
         this.boy.setData("ducking", "false");
         this.boy.setFrame('000_standing');
-        this.boy.body.setSize(160, 550, false);
-        this.boy.body.setOffset(30, 50);
+        this.boy.body.setSize(120, 520, false);
+        this.boy.body.setOffset(80, 70);
     },
 
     bossFire: function () {
