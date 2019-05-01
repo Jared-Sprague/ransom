@@ -13,20 +13,10 @@ let BossScene = new Phaser.Class({
         this.background = this.add.image(0, 0, 'bossroom').setOrigin(0, 0);
         this.background.setInteractive();
         this.background.on('pointerdown', () => {
-            // shoot arrow at boss
-            if (this.boy.getData("standing") === "true") {
-                this.boy.setFrame('bowdrawn');
-                this.boy.body.setOffset(60, 50);
-            }
+            this.playerDrawBow();
         });
-
         this.background.on('pointerup', () => {
-            // shoot arrow at boss
-            if (this.boy.getData("standing") === "true") {
-                this.boy.setFrame('bowholding');
-                this.playerShoot();
-                this.boy.body.setOffset(60, 50);
-            }
+            this.playerReleaseBow();
         });
 
         this.createLifeBar();
@@ -89,20 +79,11 @@ let BossScene = new Phaser.Class({
         this.boss.setData("hp", 35);
 
         this.boss.on('pointerdown', () => {
-           // shoot arrow at boss
-           if (this.boy.getData("standing") === "true") {
-               this.boy.setFrame('bowdrawn');
-               this.boy.body.setOffset(60, 50);
-           }
+           this.playerDrawBow();
         });
 
         this.boss.on('pointerup', () => {
-            // shoot arrow at boss
-            if (this.boy.getData("standing") === "true") {
-                this.boy.setFrame('bowholding');
-                this.playerShoot();
-                this.boy.body.setOffset(60, 50);
-            }
+            this.playerReleaseBow();
         });
 
         // Add boy
@@ -114,10 +95,12 @@ let BossScene = new Phaser.Class({
         // player input
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Start boss firing
-        this.fireballInterval = setInterval(() => {
-            this.bossFire();
-        }, 1000);
+        setTimeout(() => {
+            // Start boss firing
+            this.fireballInterval = setInterval(() => {
+                this.bossFire();
+            }, 1000);
+        }, 3000);
     },
 
     update: function (time, delta) {
@@ -234,8 +217,8 @@ let BossScene = new Phaser.Class({
                     this.boy.setFrame('jump');
 
                     // change the physics collision area
-                    this.boy.body.setSize(130, 420, false);
-                    this.boy.body.setOffset(90, 50);
+                    this.boy.body.setSize(90, 420, false);
+                    this.boy.body.setOffset(120, 50);
                 },
                 onComplete: () => {
                     this.playerStand();
@@ -250,8 +233,8 @@ let BossScene = new Phaser.Class({
             this.boy.setFrame('duck');
 
             // change the physics collision area
-            this.boy.body.setSize(130, 320, false);
-            this.boy.body.setOffset(110, 300);
+            this.boy.body.setSize(70, 320, false);
+            this.boy.body.setOffset(170, 300);
         }
     },
 
@@ -260,8 +243,8 @@ let BossScene = new Phaser.Class({
         this.boy.setData("jumping", "false");
         this.boy.setData("ducking", "false");
         this.boy.setFrame('000_standing');
-        this.boy.body.setSize(120, 520, false);
-        this.boy.body.setOffset(80, 70);
+        this.boy.body.setSize(70, 500, false);
+        this.boy.body.setOffset(130, 90);
     },
 
     bossFire: function () {
@@ -302,6 +285,23 @@ let BossScene = new Phaser.Class({
             setTimeout(() => {
                 this.bowCooldown = false;
             }, 300);
+        }
+    },
+
+    playerDrawBow: function () {
+        // draw bow
+        if (this.boy.getData("standing") === "true") {
+            this.boy.setFrame('bowdrawn');
+            this.boy.body.setOffset(140, 100);
+        }
+    },
+
+    playerReleaseBow: function () {
+        // shoot arrow at boss
+        if (this.boy.getData("standing") === "true") {
+            this.boy.setFrame('bowholding');
+            this.playerShoot();
+            this.boy.body.setOffset(140, 100);
         }
     },
 
