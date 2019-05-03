@@ -17,7 +17,11 @@ let LobbyScene = new Phaser.Class({
         this.puzzleForceFieldActive = data.puzzleSolved;
 
         // Add background image
-        this.add.image(0, 0, 'underworldlobby').setOrigin(0, 0)
+        this.background = this.add.image(0, 0, 'underworldlobby').setOrigin(0, 0);
+        this.background.setInteractive();
+        this.background.on('pointerup', (pointer) => {
+            this.playerMoveToPoint(pointer.upX, pointer.upY);
+        });
 
         if (!data.music) {
             this.music = this.sound.add('ost_bro', {loop: true});
@@ -90,12 +94,52 @@ let LobbyScene = new Phaser.Class({
         }
 
         // add boy
-        this.boy = this.physics.add.sprite(400, 500, 'boy_fight');
-        this.boy.setScale(0.4);
+        this.boy = this.physics.add.sprite(400, 500, 'walking');
+        this.boy.setScale(0.8);
+        this.boy.setData("is_walking", false);
+        this.moveToX = this.boy.x;
+        this.moveToY = this.boy.y;
+
+        this.walkSpeed = 3;
     },
 
     update: function () {
         this.lifeBar.setScale(this.life / 100, 1);
+
+        // see if we need to move player
+        if (this.moveToX !== this.boy.x || this.moveToY !== this.boy.y) {
+
+            if (!this.boy.getData("is_walking")) {
+                this.boy.setData("is_walking", true);
+                this.boy.anims.play("walk");
+            }
+
+            if (this.moveToX > this.boy.x) {
+                this.boy.x += this.walkSpeed;
+                this.boy.flipX = false;
+            }
+            else {
+                this.boy.flipX = true;
+                this.boy.x -= this.walkSpeed;
+            }
+            if (Math.abs(this.moveToX - this.boy.x) <= 7)
+                this.boy.x = this.moveToX;
+
+            if (this.moveToY > this.boy.y) {
+                this.boy.y += this.walkSpeed;
+            }
+            else {
+                this.boy.y -= this.walkSpeed;
+            }
+            if (Math.abs(this.moveToY - this.boy.y) <= 7)
+                this.boy.y = this.moveToY
+        }
+        else if (this.boy.getData("is_walking")) {
+            this.boy.anims.stop();
+            this.boy.setFrame("000_0");
+            this.boy.setData("is_walking", false);
+        }
+
     },
 
 
@@ -137,4 +181,14 @@ let LobbyScene = new Phaser.Class({
 
         this.lifeBar.setScale(this.life / 100, 1);
     },
+
+    playerMoveToPoint(x, y) {
+        console.log("move player to x, y: ", x, y);
+
+        this.moveToX = x;
+        this.moveToY = y - (this.boy.displayHeight / 2);
+
+        if (this.moveToY < 360)
+            this.moveToY = 360;
+    }
 });
